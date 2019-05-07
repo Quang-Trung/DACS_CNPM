@@ -5,9 +5,9 @@ namespace DACS_CNPM.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class DbContext : System.Data.Entity.DbContext
+    public partial class DACSDbContext : System.Data.Entity.DbContext
     {
-        public DbContext()
+        public DACSDbContext()
             : base("name=DACSDbContext")
         {
         }
