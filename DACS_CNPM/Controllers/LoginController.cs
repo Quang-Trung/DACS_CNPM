@@ -1,5 +1,6 @@
 ﻿using DACS_CNPM.DAO;
 using DACS_CNPM.Entities;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -7,6 +8,7 @@ namespace DACS_CNPM.Controllers
 {
     public class LoginController : Controller
     {
+        DACSDbContext db = new DACSDbContext();
         // GET: Login
         public ActionResult Login()
         {
@@ -17,14 +19,15 @@ namespace DACS_CNPM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LoginAction(Hoc_Vien acc)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-               
                 UserDAO user = new UserDAO();
+
                 var res = user.Login(acc.TenDn, acc.MatKhau);
                 if (res == 1)
                 {
-                    Session["UserName"] = acc.TenDn;
+                    var tai_khoan = db.Hoc_Vien.SingleOrDefault(x => x.TenDn == acc.TenDn);
+                    Session["UserName"] = tai_khoan;
                     return RedirectToAction("Index", "Home");
 
                 }
@@ -45,14 +48,15 @@ namespace DACS_CNPM.Controllers
                     ModelState.AddModelError("", "Đăng nhập không đúng.");
                 }
             }
-            return RedirectToAction("Index", "Home");
+            return View("Login");
 
         }
 
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Đăng Nhập", "Login");
+            Session["UserName"] = null;
+            return RedirectToAction("Login", "Login");
         }
     }
 }

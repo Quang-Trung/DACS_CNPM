@@ -18,6 +18,12 @@ namespace DACS_CNPM
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "Login",
+                url: "dang-nhap",
+                defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional },
+            namespaces : new[] {"DACS_CNPM.Controllers"}
+                );
         }
     }
 }

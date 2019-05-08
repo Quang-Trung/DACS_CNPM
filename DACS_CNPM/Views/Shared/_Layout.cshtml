@@ -35,7 +35,7 @@
                 <div class="content-topbar container h-100">
                     <div class="left-topbar">
                         <span class="left-topbar-item flex-wr-s-c">
-                           
+
                         </span>
 
                         <a href="#" class="left-topbar-item">
@@ -45,14 +45,25 @@
                         <a href="#" class="left-topbar-item">
                             Liên hệ
                         </a>
+                        @if (Session["UserName"] == null)
+                        {<a href="/Hoc_Vien/Create" class="left-topbar-item">
+                                Đăng ký
+                            </a>
 
-                        <a href="/Hoc_Vien/Create" class="left-topbar-item">
-                            Đăng ký
-                        </a>
+                            <a href="/Login/Login" class="left-topbar-item">
+                                Đăng nhập
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="#" class="left-topbar-item">
+                                Xin Chào : @Session["UserName"].ToString();
+                            </a>
+                            <a href="/Login/Logout" class="left-topbar-item">
+                                Đăng Xuất
+                            </a>
+                        }
 
-                        <a href="/Login/Login" class="left-topbar-item">
-                            Đăng nhập
-                        </a>
                     </div>
 
                     <div class="right-topbar">
