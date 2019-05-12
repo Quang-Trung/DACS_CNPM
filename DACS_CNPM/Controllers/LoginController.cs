@@ -1,5 +1,7 @@
-﻿using DACS_CNPM.DAO;
+﻿using DACS_CNPM.Common;
+using DACS_CNPM.DAO;
 using DACS_CNPM.Entities;
+using DACS_CNPM.Models;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -21,13 +23,18 @@ namespace DACS_CNPM.Controllers
         {
             if (!ModelState.IsValid)
             {
-                UserDAO user = new UserDAO();
+                UserDAO dao = new UserDAO();
 
-                var res = user.Login(acc.TenDn, acc.MatKhau);
+                var res = dao.Login(acc.TenDn, acc.MatKhau);
                 if (res == 1)
                 {
-                    var tai_khoan = db.Hoc_Vien.SingleOrDefault(x => x.TenDn == acc.TenDn);
-                    Session["UserName"] = tai_khoan;
+                    var user = dao.GetById(acc.TenDn);
+                    var userSession = new UserLogin();
+                    userSession.UserName = user.TenDn;
+                    userSession.UserID = user.MaHv;
+
+                    Session.Add(CommonConstants.USER_SESSION, userSession);
+                    
                     return RedirectToAction("Index", "Home");
 
                 }
@@ -54,8 +61,7 @@ namespace DACS_CNPM.Controllers
 
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
-            Session["UserName"] = null;
+            Session[CommonConstants.USER_SESSION] = null;
             return RedirectToAction("Login", "Login");
         }
     }

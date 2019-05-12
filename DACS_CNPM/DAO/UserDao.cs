@@ -13,6 +13,27 @@ namespace DACS_CNPM.DAO
         {
             db = new DACSDbContext();
         }
+
+        public Hoc_Vien GetById(string userName)
+        {
+            return db.Hoc_Vien.SingleOrDefault(x => x.TenDn == userName);
+        }
+
+        public bool Update(Hoc_Vien entity)
+        {
+            try {
+                var user = db.Hoc_Vien.Find(entity.MaHv);
+                user.HoTen = entity.HoTen;
+                user.HinhAnh = entity.HinhAnh;
+                user.NgaySinh = entity.NgaySinh;
+                user.Sdt = entity.Sdt;
+                db.SaveChanges();
+                return true;
+            } catch {
+                return false;
+            }
+            
+        }
         public int Login(string tk, string mk)
         {
             if (tk == null || mk == null)

@@ -41,13 +41,13 @@ namespace DACS_CNPM.Controllers
         public ActionResult Create()
         {
             ViewBag.MaLoaiTV = new SelectList(db.Loai_TV.ToList().OrderBy(x => x.TenLoai), "MaLoaiTv", "TenLoai");
-            
+
             return View();
         }
 
         // POST: Hoc_Vien/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Hoc_Vien hv, HttpPostedFileBase fileanh)
@@ -93,8 +93,13 @@ namespace DACS_CNPM.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MaLoaiTV = new SelectList(db.Loai_TV.ToList().OrderBy(x => x.TenLoai), "MaLoaiTv", "TenLoai");
-            return View(hoc_Vien);
+            else
+            {
+                ViewBag.MaLoaiTV = new SelectList(db.Loai_TV.ToList().OrderBy(x => x.TenLoai), "MaLoaiTv", "TenLoai");
+                
+                return View(hoc_Vien);
+            }
+
         }
 
         // POST: Hoc_Vien/Edit/5
@@ -102,18 +107,79 @@ namespace DACS_CNPM.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaHv,TenDn,MatKhau,HoTen,DiaChi,Email,Sdt,MaLoaiTV,NgaySinh,HinhAnh")] Hoc_Vien hoc_Vien)
+        public ActionResult Edit(Hoc_Vien hv, HttpPostedFileBase fileanh)
         {
-            if (ModelState.IsValid)
+            Hoc_Vien hoc_Vien = db.Hoc_Vien.Find(hv.MaHv);
+            if (fileanh == null)
             {
-                db.Entry(hoc_Vien).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                hoc_Vien.HoTen = hv.HoTen;
+                hoc_Vien.NgaySinh = hv.NgaySinh;
+                hoc_Vien.Sdt = hv.Sdt;
+                hoc_Vien.Email = hv.Email;
+                hoc_Vien.DiaChi = hv.DiaChi;
             }
-            ViewBag.MaLoaiTV = new SelectList(db.Loai_TV.ToList().OrderBy(x => x.TenLoai), "MaLoaiTv", "TenLoai");
-            return View(hoc_Vien);
+            else
+            {
+                var filename = Path.GetFileName(fileanh.FileName);
+                var path = Path.Combine(Server.MapPath("~/Content/HV_Image"), filename);
+                fileanh.SaveAs(path);
+                hoc_Vien.HinhAnh = fileanh.FileName;
+                hoc_Vien.HoTen = hv.HoTen;
+                hoc_Vien.NgaySinh = hv.NgaySinh;
+                hoc_Vien.Sdt = hv.Sdt;
+                hoc_Vien.Email = hv.Email;
+                hoc_Vien.DiaChi = hv.DiaChi;
+            }
+
+            if (!ModelState.IsValid)
+            {
+                db.SaveChanges();
+                SetAlert("Sửa thành công", "success");
+            }
+            else
+            {
+                SetAlert("Không sửa được", "danger");
+                return View(hv);
+            }
+            return View(hv);
         }
 
+        public ActionResult Matkhau(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Hoc_Vien hoc_Vien = db.Hoc_Vien.Find(id);
+            if (hoc_Vien == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(hoc_Vien);
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Matkhau(Hoc_Vien hv)
+        {
+            Hoc_Vien hoc_Vien = db.Hoc_Vien.Find(hv.MaHv);
+            hoc_Vien.MatKhau = hv.MatKhau;
+            if (!ModelState.IsValid)
+            {
+                db.SaveChanges();
+                SetAlert("Sửa thành công", "success");
+            }
+            else
+            {
+                SetAlert("Không sửa được", "danger");
+                return View(hv);
+            }
+            return View(hv);
+        }
         public void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;

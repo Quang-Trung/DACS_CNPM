@@ -1,0 +1,65 @@
+﻿@model DACS_CNPM.Entities.Dang_Ky_KH
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Dang_Ky_KH</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hoc_Vien.TenDn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hoc_Vien.TenDn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Khoa_hoc.TenKh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Khoa_hoc.TenKh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDangKy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDangKy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UuDai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UuDai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThanhToan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThanhToan)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

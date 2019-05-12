@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DACS_CNPM.Entities.Dang_Ky_KH>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hoc_Vien.TenDn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Khoa_hoc.TenKh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDangKy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UuDai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThanhToan)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hoc_Vien.TenDn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Khoa_hoc.TenKh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayDangKy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UuDai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThanhToan)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaDk }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaDk }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaDk })
+        </td>
+    </tr>
+}
+
+</table>

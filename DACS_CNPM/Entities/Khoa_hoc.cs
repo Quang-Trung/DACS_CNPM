@@ -5,6 +5,7 @@ namespace DACS_CNPM.Entities
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using DACS_CNPM.DAO;
 
     public partial class Khoa_hoc
     {
@@ -47,5 +48,10 @@ namespace DACS_CNPM.Entities
         public virtual Loai_Khoa_Hoc Loai_Khoa_Hoc { get; set; }
 
         public virtual Mon_Hoc Mon_Hoc { get; set; }
+
+        public static implicit operator Khoa_hoc(KhoaHocDAO v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
