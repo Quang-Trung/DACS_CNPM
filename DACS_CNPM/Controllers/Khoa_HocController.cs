@@ -37,30 +37,32 @@ namespace DACS_CNPM.Controllers
         }
 
         // GET: Khoa_Hoc/Create
-        public ActionResult Create()
-        {
-            ViewBag.MaHv = new SelectList(db.Hoc_Vien, "MaHv", "TenDn");
-            ViewBag.MaKh = new SelectList(db.Khoa_hoc, "MaKh", "TenKh");
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    ViewBag.MaHv = new SelectList(db.Hoc_Vien, "MaHv", "TenDn");
+        //    ViewBag.MaKh = new SelectList(db.Khoa_hoc, "MaKh", "TenKh");
+        //    return View();
+        //}
 
         // POST: Khoa_Hoc/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaDk,MaHv,MaKh,NgayDangKy,UuDai,ThanhToan")] Dang_Ky_KH dang_Ky_KH)
+        public ActionResult Dang_ky(int mahv, int makh)
         {
+            var session = (UserLogin)Session[DACS_CNPM.Common.CommonConstants.USER_SESSION];
+            Dang_Ky_KH dang_ky = new Dang_Ky_KH();
             if (ModelState.IsValid)
             {
-                db.Dang_Ky_KH.Add(dang_Ky_KH);
+                dang_ky.MaHv = session.UserID;
+                dang_ky.MaKh = makh;
+                dang_ky.NgayDangKy = DateTime.Now;
+                db.Dang_Ky_KH.Add(dang_ky);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View("IndexGV", "Home");
             }
-
-            ViewBag.MaHv = new SelectList(db.Hoc_Vien, "MaHv", "TenDn", dang_Ky_KH.MaHv);
-            ViewBag.MaKh = new SelectList(db.Khoa_hoc, "MaKh", "TenKh", dang_Ky_KH.MaKh);
-            return View(dang_Ky_KH);
+            return View("IndexGV","Home");
         }
 
         // GET: Khoa_Hoc/Edit/5
