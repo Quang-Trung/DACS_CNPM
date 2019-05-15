@@ -36,8 +36,20 @@
                         }
                         else
                         {
-                            <li><a href="/Login/Logout">Đăng xuất</a></li>
-                            <li><a href="#">Tài khoản của tôi</a></li>
+                            <li class="cart">
+                              <span>Tài khoản của tôi</span>
+                                <div id="dd" class="wrapper-dropdown-2">
+                                    <ul class="dropdown">
+                                        <li><a href="/Hoc_Vien/dangky/@session.UserID">Khóa học đã đăng ký</a></li>
+                                        <li><a href="/Hoc_Vien/Edit?id=@session.UserID">Sửa thông tin</a></li>
+                                        <li><a href="/Hoc_Vien/Matkhau1?id=@session.UserID">Đổi mật khẩu</a></li>
+
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="cart"><a href="/Login/Logout">Đăng xuất | </a></li>
+
                         }
                     </ul>
                 </div>
@@ -45,7 +57,7 @@
             </div>
             <div class="header_top">
                 <div class="logo">
-                    <a href="/Home/index"><img src="~/Content/images/logo.png" alt="" /></a>
+                    <a href="/Home/index"><img src="~/Content/images/moon.png" alt="" /></a>
                 </div>
 
                 <script type="text/javascript">
@@ -82,10 +94,10 @@
                 <div class="menu">
                     <ul>
                         <li class="active"><a href="/Home/index">Trang chủ</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="delivery.html">Delivery</a></li>
-                        <li><a href="news.html">Bảng tin</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="/Home/IndexKH">Khóa học</a></li>
+                        <li><a href="/Home/IndexGV">Giảng viên</a></li>
+
+                        <li><a href="#">Liên hệ</a></li>
                         <div class="clear"></div>
                     </ul>
                 </div>
@@ -103,68 +115,18 @@
         <div class="footer">
             <div class="wrap">
                 <div class="section group">
-                    <div class="col_1_of_4 span_1_of_4">
-                        <h4>Information</h4>
-                        <ul>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="contact.html">Customer Service</a></li>
-                            <li><a href="#">Advanced Search</a></li>
-                            <li><a href="delivery.html">Orders and Returns</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div class="col_1_of_4 span_1_of_4">
-                        <h4>Why buy from us</h4>
-                        <ul>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="contact.html">Customer Service</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="contact.html">Site Map</a></li>
-                            <li><a href="#">Search Terms</a></li>
-                        </ul>
-                    </div>
-                    <div class="col_1_of_4 span_1_of_4">
-                        <h4>My account</h4>
-                        <ul>
-                            <li><a href="contact.html">Sign In</a></li>
-                            <li><a href="index.html">View Cart</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
-                            <li><a href="contact.html">Help</a></li>
-                        </ul>
-                    </div>
-                    <div class="col_1_of_4 span_1_of_4">
-                        <h4>Contact</h4>
-                        <ul>
-                            <li><span>+91-123-456789</span></li>
-                            <li><span>+00-123-000000</span></li>
-                        </ul>
-                        <div class="social-icons">
-                            <h4>Follow Us</h4>
-                            <ul>
-                                <li><a href="#" target="_blank"><img src="~/Content/images/facebook.png" alt="" /></a></li>
-                                <li><a href="#" target="_blank"><img src="~/Content/images/twitter.png" alt="" /></a></li>
-                                <li><a href="#" target="_blank"><img src="~/Content/images/skype.png" alt="" /> </a></li>
-                                <li><a href="#" target="_blank"> <img src="~/Content/images/dribbble.png" alt="" /></a></li>
-                                <li><a href="#" target="_blank"> <img src="~/Content/images/linkedin.png" alt="" /></a></li>
-                                <div class="clear"></div>
-                            </ul>
-                        </div>
-                    </div>
+                    <h3>Đại học công nghệ TP.HCM - HUTECH<br /></h3>
+                    <h4>Đồ án cơ sở chuyên ngành công nghệ phần mềm<br /></h4>
+                    Sinh viên thực hiện : <br />
+                    Nguyễn Quang Trung - 1611060303<br />
+                    Trần Nguyên Trâm - 1611060395
+                </div>
+                <div class="copy_right">
+                    <p>&copy; Đồ án cơ sở - 2019</p>
                 </div>
             </div>
-            <div class="copy_right">
-                <p>&copy; 2013 home_shoppe. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
-            </div>
-        </div>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $().UItoTop({ easingType: 'easeOutQuart' });
 
-            });
-        </script>
-        <a href="#" id="toTop"><span id="toTopHover"> </span></a>
-    </div>
+        </div>
 </body>
 </html>
 

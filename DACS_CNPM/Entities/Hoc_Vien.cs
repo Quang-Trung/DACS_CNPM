@@ -70,5 +70,6 @@
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Giang_Vien> Giang_Vien { get; set; }
+      
     }
 }

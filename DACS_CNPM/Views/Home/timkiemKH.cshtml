@@ -8,34 +8,64 @@
 @{
     ViewBag.Title = "KhoaHocTheoMon";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var dang_ky = ViewBag.dangky;
 }
 @{ List<Khoa_hoc> khoahoc = (List<Khoa_hoc>)ViewData["TimKiemKH"];}
 <h2>Danh sách khóa học</h2>
 <hr />
 <hr />
-<ul class="section group">
-    @foreach (var item in khoahoc)
-    {
-        <li>
-            <div class="grid_1_of_4 images_1_of_4">
-                <a href="#"><img src="~/Content/KH_Images/@item.Banner" alt="" /></a>
-                <h2>@item.TenKh</h2>
-                <div class="price-details">
-                    <div >
-                        <p><span class="rupees">@item.HocPhi đ</span></p>
-                    </div>
+<div class="main">
+    <div class="content">
+        <div class="section group">
+            @foreach (var item in khoahoc)
+            {
 
-                    <div class="add-cart">
-                        <h4><a href="preview.html">Đăng ký</a></h4>
+                <div class="grid_1_of_4 images_1_of_4">
+                    <a href="/Home/chitietkhoahoc?id=@item.MaKh"><img src="~/Content/KH_Images/@item.Banner" alt="" height="150" width="250" /></a>
+                    <h2>@item.TenKh</h2>
+
+                    <div class="price-details">
+                        <div>
+                            <p><span class="rupees">@item.HocPhi đ</span></p>
+                        </div>
+
+                        @{
+                            var session = (UserLogin)Session[DACS_CNPM.Common.CommonConstants.USER_SESSION];
+                        }
+                        @if (session == null)
+                        {
+                            <div class="add-cart">
+                                <h4><a href="/Login/Login" class="btn btn-success"> Đăng ký</a></h4>
+                            </div>
+                        }
+                        else
+                        {
+                            var x = 0;
+                            foreach (Dang_Ky_KH da_dang_ky in dang_ky)
+                            {
+                                if (da_dang_ky.MaKh == item.MaKh && da_dang_ky.MaHv == session.UserID)
+                                {
+                                    <div class="add-cart">
+                                        <h4><button class="btn btn-success">Đã đăng ký </button></h4>
+                                    </div>
+                                    x += 1;
+                                }
+                            }
+                            if (x == 0)
+                            {
+                                <div class="add-cart">
+                                    <h4><a href="/DK_Khoa_Hoc/Dang_ky?id= @item.MaKh" class="btn btn-success"> Đăng ký</a></h4>
+                                </div>
+                            }
+
+                        }
+
+                        <div class="clear"></div>
                     </div>
-                    <button class="btn btn-block">chi tiết</button>
-                    <div class="clear"></div>
                 </div>
 
-            </div>
+            }
 
-        </li>
-
-    }
-</ul>
-
+        </div>
+    </div>
+</div>

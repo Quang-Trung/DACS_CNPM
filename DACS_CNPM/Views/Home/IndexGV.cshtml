@@ -11,30 +11,27 @@
 <hr />
 <div class="main">
     <div class="content">
-        <ul class="section group">
+        <div class="section group">
             @foreach (var item in Model)
             {
-                <li>
-                    <div class="grid_1_of_4 images_1_of_4">
-                        <a href="#"><img src="~/Content/KH_Images/@item.HinhAnh" alt="" /></a>
-                        <h2>@item.HoTen</h2>
-                        
-                        <div class="price-details">
-                            
 
-                            <div class="add-cart">
-                                <h4><a href="preview.html">Theo dõi</a></h4>
-                            </div>
-                            <button class="btn btn-block">Thông tin</button>
-                            <div class="clear"></div>
+                <div class="grid_1_of_4 images_1_of_4">
+                    <a href="/Home/Chitietgiangvien?id=@item.MaGv"><img src="~/Content/GV_Images/@item.HinhAnh" alt="" height="200" width="250"/></a>
+                    <h2>@item.HoTen</h2>
+
+                    <div class="price-details">
+
+
+                        <div class="add-cart">
+                            <h4><a href="preview.html">Theo dõi</a></h4>
                         </div>
 
+                        <div class="clear"></div>
                     </div>
 
-                </li>
-
+                </div>
             }
-        </ul>
+        </div>
     </div>
 </div>
 <div class="pagination">

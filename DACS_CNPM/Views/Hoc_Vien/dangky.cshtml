@@ -1,0 +1,43 @@
+﻿@model DACS_CNPM.Entities.Dang_Ky_KH
+
+@{
+    ViewBag.Title = "dangky";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using DACS_CNPM.Entities
+
+@{ List<Dang_Ky_KH> khoahoc = (List<Dang_Ky_KH>)ViewData["TimKiemDK"];}
+<h2>Danh sách khóa học</h2>
+<hr />
+<hr />
+<div class="main">
+    <div class="content">
+        <div class="section group">
+            @foreach (var item in khoahoc)
+            {
+
+                <div class="grid_1_of_4 images_1_of_4">
+                    <a href="/Home/chitietkhoahoc?id=@item.MaKh"><img src="~/Content/KH_Images/@item.Khoa_hoc.Banner" alt="" height="150" width="250" /></a>
+                    <h2>@item.Khoa_hoc.TenKh</h2>
+
+                    @{ DateTime ngay = (DateTime)item.NgayDangKy;}
+                    <div class="price-details">
+                        <div>
+                            <p><span class="rupees">Ngày đăng ký : <br>@ngay.Day/@ngay.Month/@ngay.Year</span></p>
+                        </div>
+
+                        <div class="add-cart">
+                            <h4><button class="btn btn-danger">Danh sách bài học </button></h4>
+                        </div>
+
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>

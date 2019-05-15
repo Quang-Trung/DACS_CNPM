@@ -1,0 +1,98 @@
+﻿@model DACS_CNPM.Entities.Khoa_hoc
+@using DACS_CNPM.Entities
+@{
+    ViewBag.Title = "ChitietKhoaHoc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var dang_ky = ViewBag.dangky;
+}
+
+<h2>Chi tiết khóa học</h2>
+<hr /><hr />
+<body>
+    <div class="section group">
+        <div class="cont-desc span_1_of_2">
+            <div class="product-details">
+                <div class="grid images_3_of_2">
+                    <div id="container">
+                        <div id="products_example">
+                            <div id="products">
+                                <div class="slides_container">
+                                    <a href="#"><img src="~/Content/KH_Images/@Model.Banner" alt="" height="150" width="250" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="desc span_3_of_2">
+                    <h2>@Html.DisplayFor(model => model.TenKh)</h2>
+                    <p>
+                        <h4>Giảng viên :  @Html.DisplayFor(model => model.Giang_Vien.HoTen) </h4>
+                        <h4>Môn học :  @Html.DisplayFor(model => model.Mon_Hoc.TenMh) </h4>
+                        <h4>Mô tả :  @Html.DisplayFor(model => model.Mota) </h4>
+                    </p>
+                    <h4>Học phí: <label style="color:crimson">@Html.DisplayFor(model => model.HocPhi) đ</label></h4>
+                    <div class="share-desc">
+                        <div class="share">
+                            <p>Chia sẻ :</p>
+                            <ul>
+                                <li><a href="#"><img src="~/Content/images/facebook.png" alt="" /></a></li>
+                                <li><a href="#"><img src="~/Content/images/twitter.png" alt="" /></a></li>
+                            </ul>
+                        </div>
+                        <br />
+
+                        <div class="clear"></div>
+                    </div>
+                    <hr />
+                    <div>
+                        @{
+                            var session = (UserLogin)Session[DACS_CNPM.Common.CommonConstants.USER_SESSION];
+                        }
+                        @if (session == null)
+                        {
+                            <div class="add-cart">
+                                <h4><a href="/Login/Login" class="btn btn-success"> Đăng ký</a></h4>
+                            </div>
+                        }
+                        else
+                        {
+                            var x = 0;
+                            foreach (Dang_Ky_KH da_dang_ky in dang_ky)
+                            {
+                                if (Model.MaKh == da_dang_ky.MaKh && da_dang_ky.MaHv == session.UserID)
+                                {
+                                    <div class="add-cart">
+                                        <h4><button class="btn btn-success">Đã đăng ký </button></h4>
+                                        <h4><a href="#" class="btn btn-danger"> Danh sách bài học</a></h4>
+                                    </div>
+                                    x += 1;
+
+                                }
+                            }
+                            if (x == 0)
+                            {
+                                <div class="add-cart">
+                                    <h4><a href="/DK_Khoa_Hoc/Dang_ky?id= @Model.MaKh" class="btn btn-success"> Đăng ký</a></h4>
+                                </div>
+                            }
+
+                        }
+                    </div>
+                    <hr />
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#horizontalTab').easyResponsiveTabs({
+                        type: 'default', //Types: default, vertical, accordion
+                        width: 'auto', //auto or any width like 600px
+                        fit: true   // 100% fit in a container
+                    });
+                });
+            </script>
+        </div>
+    </div>
+
+</body>

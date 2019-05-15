@@ -141,9 +141,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CommonConstants.cs" />
+    <Compile Include="Common\DK_KH.cs" />
     <Compile Include="Controllers\Hoc_VienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Khoa_HocController.cs" />
+    <Compile Include="Controllers\DK_Khoa_HocController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="DAO\GiangVienDAO.cs" />
     <Compile Include="DAO\KhoaHocDAO.cs" />
@@ -157,8 +158,10 @@
     <Compile Include="Entities\Loai_Khoa_Hoc.cs" />
     <Compile Include="Entities\Loai_TV.cs" />
     <Compile Include="Entities\DACSDbContext.cs" />
+    <Compile Include="Entities\Model1.cs" />
     <Compile Include="Entities\Mon_Hoc.cs" />
     <Compile Include="Entities\Quan_Tri.cs" />
+    <Compile Include="Entities\Theo_doi.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -166,7 +169,12 @@
     <Compile Include="Migrations\201905071604325_InitialModel.Designer.cs">
       <DependentUpon>201905071604325_InitialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905140918134_InitialModel1.cs" />
+    <Compile Include="Migrations\201905140918134_InitialModel1.Designer.cs">
+      <DependentUpon>201905140918134_InitialModel1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ChangePass.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\UserLogin.cs" />
@@ -180,7 +188,10 @@
     <Content Include="Content\css\global.css" />
     <Content Include="Content\css\slider.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\GV_Images\cophamlieu.png" />
     <Content Include="Content\GV_Images\Dang_Viet_Hung.jpg" />
+    <Content Include="Content\GV_Images\laidachop.png" />
+    <Content Include="Content\GV_Images\leanhtuan.jpg" />
     <Content Include="Content\GV_Images\NguyenAnhTuan.jpg" />
     <Content Include="Content\GV_Images\PhanKhacNghe.jpg" />
     <Content Include="Content\GV_Images\VuNgocAnh.jpg" />
@@ -203,7 +214,7 @@
     <Content Include="Content\images\feature-pic4.jpg" />
     <Content Include="Content\images\linkedin.png" />
     <Content Include="Content\images\list-img.png" />
-    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\moon.png" />
     <Content Include="Content\images\new-pic1.jpg" />
     <Content Include="Content\images\new-pic2.jpg" />
     <Content Include="Content\images\new-pic3.jpg" />
@@ -247,6 +258,8 @@
     <Content Include="Content\KH_Images\Luyenthi_THPTQG_Hoa.png" />
     <Content Include="Content\KH_Images\Luyenthi_THPTQG_Sinh.png" />
     <Content Include="Content\KH_Images\Luyenthi_THPTQG_Toan.png" />
+    <Content Include="Content\KH_Images\thptqg_hoa.png" />
+    <Content Include="Content\KH_Images\thptqg_vatly.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -280,20 +293,19 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Hoc_Vien\Create.cshtml" />
     <Content Include="Views\Hoc_Vien\Delete.cshtml" />
-    <Content Include="Views\Hoc_Vien\Details.cshtml" />
-    <Content Include="Views\Hoc_Vien\Edit.cshtml" />
-    <Content Include="Views\Hoc_Vien\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Hoc_Vien\Matkhau.cshtml" />
-    <Content Include="Views\Khoa_hoc\Create.cshtml" />
-    <Content Include="Views\Khoa_hoc\Delete.cshtml" />
-    <Content Include="Views\Khoa_hoc\Details.cshtml" />
-    <Content Include="Views\Khoa_hoc\Edit.cshtml" />
-    <Content Include="Views\Khoa_hoc\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\IndexKH.cshtml" />
     <Content Include="Views\Home\timkiemKH.cshtml" />
     <Content Include="Views\Home\IndexGV.cshtml" />
+    <Content Include="Views\DK_Khoa_Hoc\Dang_ky.cshtml" />
+    <Content Include="Views\DK_Khoa_Hoc\Details.cshtml" />
+    <Content Include="Views\Hoc_Vien\Edit.cshtml" />
+    <Content Include="Views\Home\ChitietKhoaHoc.cshtml" />
+    <Content Include="Views\Home\ChitietGiangvien.cshtml" />
+    <Content Include="Views\Hoc_Vien\Matkhau.cshtml" />
+    <Content Include="Views\Hoc_Vien\dangky.cshtml" />
+    <Content Include="Views\Hoc_Vien\Matkhau1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -316,6 +328,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201905071604325_InitialModel.resx">
       <DependentUpon>201905071604325_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905140918134_InitialModel1.resx">
+      <DependentUpon>201905140918134_InitialModel1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

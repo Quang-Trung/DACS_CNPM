@@ -11,9 +11,13 @@ namespace DACS_CNPM.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(int? trang)
         {
-            return View();
+            
+            int sosptrentrang = 6;
+            int stttrang = (trang ?? 1);
+            ViewBag.dangky = db.Dang_Ky_KH.ToList();
+            return View(db.Khoa_hoc.ToList().OrderBy(x => x.MaKh).ToPagedList(stttrang, sosptrentrang));
         }
 
         DACSDbContext db = new DACSDbContext();
@@ -37,28 +41,35 @@ namespace DACS_CNPM.Controllers
             return View(ListKhoaHoc);
         }
 
+        public ActionResult IndexKHM(int? trang)
+        {
+            ViewBag.dangky = db.Dang_Ky_KH.ToList();
+            //return View(ListSanPham);
+            int sosptrentrang = 4;
+            int stttrang = (trang ?? 1);
+            return View(db.Khoa_hoc.ToList().OrderBy(x => x.NgayKhaiGiang).ToPagedList(stttrang, sosptrentrang));
+        }
+
         public ActionResult IndexKH(int? trang)
         {
-            //return View(ListSanPham);
             int sosptrentrang = 6;
             int stttrang = (trang ?? 1);
+            ViewBag.dangky = db.Dang_Ky_KH.ToList();
             return View(db.Khoa_hoc.ToList().OrderBy(x => x.MaKh).ToPagedList(stttrang, sosptrentrang));
         }
 
 
         public ActionResult ChitietKhoaHoc(int id)
         {
-
-            Khoa_hoc sptk = new Khoa_hoc();
-            foreach (var item in ListKhoaHoc)
-            {
-                if (item.MaKh == id) sptk = item;
-            }
-            ViewBag.spct = sptk;
-            return View();
+            Khoa_hoc khoahoc = new Khoa_hoc();
+            khoahoc = db.Khoa_hoc.Find(id);
+            ViewBag.spct = khoahoc;
+            ViewBag.dangky = db.Dang_Ky_KH.ToList();
+            return View(khoahoc);
         }
         public ActionResult timkiemKH(string tenkh)
         {
+            ViewBag.dangky = db.Dang_Ky_KH.ToList();
             KhoaHocDAO sp = new KhoaHocDAO();
             ViewData["TimKiemKH"] = sp.listTimkiem(tenkh);
             return View();
@@ -66,7 +77,13 @@ namespace DACS_CNPM.Controllers
 
 
         //============== Giảng Viên =======================================================
+        public ActionResult ChitietGiangvien(int id)
+        {
+            Giang_Vien giangvien = new Giang_Vien();
+            giangvien = db.Giang_Vien.Find(id);
+            return View(giangvien);
 
+        }
         public ActionResult IndexGV(int? trang)
         {
             //return View(ListSanPham);

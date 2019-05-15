@@ -7,7 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using DACS_CNPM.DAO;
 using DACS_CNPM.Entities;
+using DACS_CNPM.Models;
 
 namespace DACS_CNPM.Controllers
 {
@@ -15,7 +17,8 @@ namespace DACS_CNPM.Controllers
     {
         private DACSDbContext db = new DACSDbContext();
 
-        // GET: Hoc_Vien
+        //============== Quản lý tài khoản ============================================
+
         public ActionResult Index()
         {
             var hoc_Vien = db.Hoc_Vien.Include(h => h.Loai_TV);
@@ -37,16 +40,15 @@ namespace DACS_CNPM.Controllers
             return View(hoc_Vien);
         }
 
-        // GET: Hoc_Vien/Create
+
+        //================== Đăng ký tài khoản ===========================================================
+
         public ActionResult Create()
         {
             ViewBag.MaLoaiTV = new SelectList(db.Loai_TV.ToList().OrderBy(x => x.TenLoai), "MaLoaiTv", "TenLoai");
 
             return View();
         }
-
-        // POST: Hoc_Vien/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -81,32 +83,26 @@ namespace DACS_CNPM.Controllers
             }
         }
 
-        // GET: Hoc_Vien/Edit/5
+        //============== Sửa thông tin ===============================================================
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            Hoc_Vien sp = db.Hoc_Vien.SingleOrDefault(n => n.MaHv == id);
+            if (sp == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Hoc_Vien hoc_Vien = db.Hoc_Vien.Find(id);
-            if (hoc_Vien == null)
-            {
-                return HttpNotFound();
+                Response.StatusCode = 404;
+                return null;
             }
             else
             {
-                ViewBag.MaLoaiTV = new SelectList(db.Loai_TV.ToList().OrderBy(x => x.TenLoai), "MaLoaiTv", "TenLoai");
-                
-                return View(hoc_Vien);
+
+                return View(sp);
             }
 
         }
 
-        // POST: Hoc_Vien/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(Hoc_Vien hv, HttpPostedFileBase fileanh)
         {
             Hoc_Vien hoc_Vien = db.Hoc_Vien.Find(hv.MaHv);
@@ -180,6 +176,82 @@ namespace DACS_CNPM.Controllers
             }
             return View(hv);
         }
+
+
+        public ActionResult Matkhau1(int? id)
+        {
+            ChangePass hoc_Vien = new ChangePass();
+            return View(hoc_Vien);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Matkhau1(ChangePass hv)
+        {
+            var session = (UserLogin)Session[DACS_CNPM.Common.CommonConstants.USER_SESSION];
+            Hoc_Vien hoc_Vien = db.Hoc_Vien.Find(session.UserID);
+
+            if (hv.MatKhau == null || hv.MatKhaumoi == null || hv.nhaplai == null)
+            {
+                SetAlert("Vui lòng điền đầu đủ các trường", "danger");
+                return View(hv);
+            }
+            else
+            {
+                if (hv.MatKhau == hoc_Vien.MatKhau)
+                {
+                    if (hv.MatKhaumoi == hoc_Vien.MatKhau)
+                    {
+                        SetAlert("Mật khẩu mới trùng với mật khẩu cũ", "danger");
+                        return View(hv);
+                    }
+                    else
+                    {
+                        if (hv.MatKhaumoi == hv.nhaplai)
+                        {
+                            hoc_Vien.MatKhau = hv.MatKhaumoi;
+                            if (ModelState.IsValid)
+                            {
+                                db.SaveChanges();
+                                SetAlert("Sửa thành công", "success");
+                            }
+                            else
+                            {
+                                SetAlert("Không sửa được", "danger");
+                                return View(hv);
+                            }
+                        }
+                        else
+                        {
+                            SetAlert("Nhập lại mật khẩu không trùng khớp", "danger");
+                            return View(hv);
+                        }
+                    }
+                }
+                else
+                {
+                    SetAlert("Mật khẩu không đúng", "danger");
+                    return View(hv);
+                }
+            }
+            return View(hv);
+        }
+
+        //================= Khóa học đã đăng ký =====================================
+        public ActionResult dangky(int id)
+        {
+            ViewBag.khoahoc = db.Khoa_hoc.ToList();
+            ViewData["TimKiemDK"] = listTimkiem(id);
+            return View();
+        }
+        public List<Dang_Ky_KH> listTimkiem(int id)
+        {
+            string search = "select * from Dang_Ky_KH where MaHv = '" + id + "'";
+            var rs = db.Dang_Ky_KH.SqlQuery(search).ToList();
+            return rs;
+        }
+
+        //=============================================================================
         public void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;

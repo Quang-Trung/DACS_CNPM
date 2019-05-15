@@ -1,0 +1,59 @@
+﻿@model DACS_CNPM.Entities.Khoa_hoc
+@using DACS_CNPM.Entities;
+@using DACS_CNPM.DAO;
+@using DACS_CNPM.Common;
+@{
+    ViewBag.Title = "Dang_ky";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    Khoa_hoc khoahoc = ViewBag.dang_ky;
+}
+
+<h2>Xác nhận đăng ký</h2>
+@if (TempData["AlertMessage"] != null)
+{
+    <div id="AlertBox" class="alert @TempData["AlertType"]">@TempData["AlertMessage"]</div>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @{
+            var session = (UserLogin)Session[DACS_CNPM.Common.CommonConstants.USER_SESSION];
+            var session1 = (DK_KH)Session[DACS_CNPM.Common.CommonConstants.KHOAHOC_SESSION];
+        }
+
+        <h4></h4>
+        <hr />
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+
+            <div class="col-md-10">
+                Tên học viên :<label class="form-control">@session.UserName</label>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                Tên khóa học : <label class="form-control">@session1.TenKh</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Đăng ký khóa học" class="btn btn-success" />
+            </div>
+        </div>
+
+        <div>
+            <button class="btn btn-group">@Html.ActionLink("Quay lại", "IndexKH", "Home")</button>
+        </div>
+
+    </div>
+
+}
+
+

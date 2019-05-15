@@ -6,11 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using DACS_CNPM.Common;
 using DACS_CNPM.Entities;
 
 namespace DACS_CNPM.Controllers
 {
-    public class Khoa_HocController : Controller
+    public class DK_Khoa_HocController : Controller
     {
         private DACSDbContext db = new DACSDbContext();
 
@@ -36,33 +37,56 @@ namespace DACS_CNPM.Controllers
             return View(dang_Ky_KH);
         }
 
-        // GET: Khoa_Hoc/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.MaHv = new SelectList(db.Hoc_Vien, "MaHv", "TenDn");
-        //    ViewBag.MaKh = new SelectList(db.Khoa_hoc, "MaKh", "TenKh");
-        //    return View();
-        //}
+        public static int id_kh;
+        public ActionResult Dang_ky(int id)
+        {
+            id_kh = id;
+           
+            var khoahoc_Session = new DK_KH();
+
+            var khoa_hoc = db.Khoa_hoc.Find(id);
+            khoahoc_Session.TenKh = khoa_hoc.TenKh;
+            khoahoc_Session.MaKh = khoa_hoc.MaKh;
+
+            Session.Add(CommonConstants.KHOAHOC_SESSION, khoahoc_Session);
+
+            Khoa_hoc dangky = db.Khoa_hoc.Find(id);
+            ViewBag.dang_ky = dangky;
+            return View();
+        }
 
         // POST: Khoa_Hoc/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Dang_ky(int mahv, int makh)
+        public ActionResult Dang_ky()
         {
+            
             var session = (UserLogin)Session[DACS_CNPM.Common.CommonConstants.USER_SESSION];
+            var khsession = (DK_KH)Session[DACS_CNPM.Common.CommonConstants.KHOAHOC_SESSION];
+
+
+            Dang_Ky_KH test = db.Dang_Ky_KH.SingleOrDefault(x => x.MaHv == session.UserID && x.MaKh == khsession.MaKh);
             Dang_Ky_KH dang_ky = new Dang_Ky_KH();
-            if (ModelState.IsValid)
-            {
-                dang_ky.MaHv = session.UserID;
-                dang_ky.MaKh = makh;
-                dang_ky.NgayDangKy = DateTime.Now;
-                db.Dang_Ky_KH.Add(dang_ky);
-                db.SaveChanges();
-                return View("IndexGV", "Home");
+            try {
+                if (ModelState.IsValid && test == null)
+                {
+                    dang_ky.MaHv = session.UserID;
+                    dang_ky.MaKh = khsession.MaKh;
+                    dang_ky.NgayDangKy = DateTime.Now;
+                    db.Dang_Ky_KH.Add(dang_ky);
+                    db.SaveChanges();
+                    SetAlert("Đăng ký thành công", "success");
+                    return View();
+                }
+                else
+                    SetAlert("Đăng ký không thành công", "danger");
             }
-            return View("IndexGV","Home");
+            catch(Exception)
+            {
+                SetAlert("Đăng ký không thành công", "danger");
+            }
+            return View();
         }
 
         // GET: Khoa_Hoc/Edit/5
@@ -124,6 +148,23 @@ namespace DACS_CNPM.Controllers
             db.Dang_Ky_KH.Remove(dang_Ky_KH);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+            {
+                TempData["AlertType"] = "alert-success";
+            }
+            else if (type == "wanning")
+            {
+                TempData["AlertType"] = "alert-wanning";
+            }
+            else if (type == "danger")
+            {
+                TempData["AlertType"] = "alert-danger";
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -1,0 +1,67 @@
+﻿@model DACS_CNPM.Entities.Giang_Vien
+
+@{
+    ViewBag.Title = "ChitietGiangvien";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Chi tiết giảng viên</h2>
+<hr /><hr />
+<body>
+    <div class="section group">
+        <div class="cont-desc span_1_of_2">
+            <div class="product-details">
+                <div class="grid images_3_of_2">
+                    <div id="container">
+                        <div id="products_example">
+                            <div id="products">
+                                <div class="slides_container">
+                                    <a href="#"><img src="~/Content/GV_Images/@Model.HinhAnh" alt="" height="150" width="250" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="desc span_3_of_2">
+                    <h2>@Html.DisplayFor(model => model.HoTen)</h2>
+                    <p>
+                        <h4>Ngày sinh :  @Html.DisplayFor(model => model.NgaySinh) </h4>
+                        <h4>Email liên hệ:  @Html.DisplayFor(model => model.Email) </h4>
+                        <h4>Lý lịch :  @Html.DisplayFor(model => model.LyLich) </h4>
+                    </p>
+                    <div class="share-desc">
+                        <div class="share">
+                            <p>Chia sẻ :</p>
+                            <ul>
+                                <li><a href="#"><img src="~/Content/images/facebook.png" alt="" /></a></li>
+                                <li><a href="#"><img src="~/Content/images/twitter.png" alt="" /></a></li>
+                            </ul>
+                        </div>
+                        <br />
+
+                        <div class="clear"></div>
+                    </div>
+                    <hr />
+                    <div class="add-cart">
+                        <h4><a href="#" class="btn btn-danger"> Theo dõi</a></h4>
+                    </div>
+                    <hr />
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#horizontalTab').easyResponsiveTabs({
+                        type: 'default', //Types: default, vertical, accordion
+                        width: 'auto', //auto or any width like 600px
+                        fit: true   // 100% fit in a container
+                    });
+                });
+            </script>
+        </div>
+    </div>
+
+</body>
+
