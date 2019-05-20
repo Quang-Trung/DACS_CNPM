@@ -9,5 +9,6 @@ namespace DACS_CNPM.Common
     {
         public static string USER_SESSION = "USER_SESSION";
         public static string KHOAHOC_SESSION = "KHOAHOC_SESSION";
+        public static string ADMIN_SESSION = "ADMIN_SESSION";
     }
 }

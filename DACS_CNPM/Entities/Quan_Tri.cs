@@ -1,4 +1,4 @@
-namespace DACS_CNPM.Entities
+﻿namespace DACS_CNPM.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -10,9 +10,12 @@ namespace DACS_CNPM.Entities
     {
         [Key]
         [StringLength(100)]
+        [Required(ErrorMessage = "Vui lòng điền tên đăng nhập")]
         public string TenDN { get; set; }
 
         [StringLength(100)]
+        [Required(ErrorMessage = "Vui lòng điền mật khẩu")]
+        [DataType(DataType.Password)]
         public string MatKhau { get; set; }
 
         public string HoTen { get; set; }
