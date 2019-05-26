@@ -17,10 +17,9 @@ namespace DACS_CNPM.Entities
         [Key]
         public int MaLoaiTv { get; set; }
 
-        public string TenLoai { get; set; }
+        public string Tenloai { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal? UuDai { get; set; }
+        public long? UuDai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hoc_Vien> Hoc_Vien { get; set; }

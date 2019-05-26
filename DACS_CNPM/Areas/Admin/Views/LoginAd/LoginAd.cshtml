@@ -1,5 +1,4 @@
 ﻿@model DACS_CNPM.Entities.Quan_Tri
-
 @{
     Layout = null;
 }
@@ -35,23 +34,23 @@
                 <div id="AlertBox" class="alert @TempData["AlertType"]">@TempData["AlertMessage"]</div>
             }
             <div class="card-body">
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
-                        <fieldset>
-                            <div class="form-group">
-                                @Html.TextBoxFor(model => model.TenDN, new { @class = "form-control", @placeholder = "Tài khoản", @autofocus = "autofocus" })
-                                @Html.ValidationMessageFor(model => model.TenDN, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                @Html.TextBoxFor(model => model.MatKhau, new { @class = "form-control", @placeholder = "Mật khẩu", @type = "password" })
-                                @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
-                            </div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @*@Html.ValidationSummary(true, "", new { @class = "alert-danger" })*@
+                    <fieldset>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.TenDN, new { @class = "form-control", @placeholder = "Tài khoản", @autofocus = "autofocus" })
+                            @Html.ValidationMessageFor(model => model.TenDN, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.MatKhau, new { @class = "form-control", @placeholder = "Mật khẩu", @type = "password" })
+                            @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                        </div>
 
-                            <button type="submit" class="btn btn-lg btn-success btn-block">Đăng nhập</button>
-                        </fieldset>
-                    }
+                        <button type="submit" class="btn btn-lg btn-success btn-block">Đăng nhập</button>
+                    </fieldset>
+                }
             </div>
         </div>
     </div>

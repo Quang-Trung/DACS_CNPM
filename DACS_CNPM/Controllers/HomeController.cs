@@ -14,13 +14,13 @@ namespace DACS_CNPM.Controllers
         public ActionResult Index(int? trang)
         {
             
-            int sosptrentrang = 6;
+            int sosptrentrang = 10;
             int stttrang = (trang ?? 1);
             ViewBag.dangky = db.Dang_Ky_KH.ToList();
             return View(db.Khoa_hoc.ToList().OrderBy(x => x.MaKh).ToPagedList(stttrang, sosptrentrang));
         }
-
         DACSDbContext db = new DACSDbContext();
+        //DACSDbContext db = new DACSDbContext();
         public static KhoaHocDAO KH = new KhoaHocDAO();
         IQueryable<Khoa_hoc> ListKhoaHoc = KH.ListKH();
 
@@ -47,12 +47,12 @@ namespace DACS_CNPM.Controllers
             //return View(ListSanPham);
             int sosptrentrang = 4;
             int stttrang = (trang ?? 1);
-            return View(db.Khoa_hoc.ToList().OrderBy(x => x.NgayKhaiGiang).ToPagedList(stttrang, sosptrentrang));
+            return View(db.Khoa_hoc.ToList().OrderBy(x => x.NgayBatDau).ToPagedList(stttrang, sosptrentrang));
         }
 
         public ActionResult IndexKH(int? trang)
         {
-            int sosptrentrang = 6;
+            int sosptrentrang = 10;
             int stttrang = (trang ?? 1);
             ViewBag.dangky = db.Dang_Ky_KH.ToList();
             return View(db.Khoa_hoc.ToList().OrderBy(x => x.MaKh).ToPagedList(stttrang, sosptrentrang));
@@ -87,7 +87,7 @@ namespace DACS_CNPM.Controllers
         public ActionResult IndexGV(int? trang)
         {
             //return View(ListSanPham);
-            int sosptrentrang = 6;
+            int sosptrentrang = 10;
             int stttrang = (trang ?? 1);
             return View(db.Giang_Vien.ToList().OrderBy(x => x.MaGv).ToPagedList(stttrang, sosptrentrang));
         }

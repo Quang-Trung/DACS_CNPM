@@ -15,7 +15,6 @@
 
         [StringLength(100)]
         [Required(ErrorMessage = "Vui lòng điền mật khẩu")]
-        [DataType(DataType.Password)]
         public string MatKhau { get; set; }
 
         public string HoTen { get; set; }

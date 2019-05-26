@@ -6,14 +6,12 @@ namespace DACS_CNPM.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("CauHoi")]
-    public partial class CauHoi
+    public partial class Cau_Hoi
     {
         [Key]
-        public int MaCH { get; set; }
+        public int MaCh { get; set; }
 
-        [Column("CauHoi")]
-        public string CauHoi1 { get; set; }
+        public string CauHoi { get; set; }
 
         public string PhanHoi { get; set; }
 

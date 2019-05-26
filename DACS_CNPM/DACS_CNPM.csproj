@@ -153,6 +153,9 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginAdController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QLKhoaHocController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanTriAdController.cs" />
+    <Compile Include="Areas\Admin\Models\ChangePassAdModel.cs" />
     <Compile Include="Areas\Admin\Models\LoginAdModel.cs" />
     <Compile Include="Common\AdminLogin.cs" />
     <Compile Include="Common\CommonConstants.cs" />
@@ -166,18 +169,16 @@
     <Compile Include="DAO\KhoaHocDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="Entities\Bai_Hoc.cs" />
-    <Compile Include="Entities\CauHoi.cs" />
+    <Compile Include="Entities\Cau_Hoi.cs" />
+    <Compile Include="Entities\DACSDbContext.cs" />
     <Compile Include="Entities\Dang_Ky_KH.cs" />
     <Compile Include="Entities\Giang_Vien.cs" />
     <Compile Include="Entities\Hoc_Vien.cs" />
     <Compile Include="Entities\Khoa_hoc.cs" />
     <Compile Include="Entities\Loai_Khoa_Hoc.cs" />
     <Compile Include="Entities\Loai_TV.cs" />
-    <Compile Include="Entities\DACSDbContext.cs" />
-    <Compile Include="Entities\Model1.cs" />
     <Compile Include="Entities\Mon_Hoc.cs" />
     <Compile Include="Entities\Quan_Tri.cs" />
-    <Compile Include="Entities\Theo_doi.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,6 +193,10 @@
     <Compile Include="Migrations\201905191459467_1.cs" />
     <Compile Include="Migrations\201905191459467_1.Designer.cs">
       <DependentUpon>201905191459467_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905251424415_taiKhoan.cs" />
+    <Compile Include="Migrations\201905251424415_taiKhoan.Designer.cs">
+      <DependentUpon>201905251424415_taiKhoan.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChangePass.cs" />
@@ -2024,8 +2029,13 @@
     <Content Include="Assets\Admin\vendor\jquery\jquery.min.map" />
     <Content Include="Assets\Admin\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAd.cshtml" />
-    <Content Include="Areas\Admin\Views\HomeAd\IndexAd.cshtml" />
     <Content Include="Areas\Admin\Views\LoginAd\LoginAd.cshtml" />
+    <Content Include="Areas\Admin\Views\QLKhoaHoc\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QLKhoaHoc\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QLKhoaHoc\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAd\IndexAd.cshtml" />
+    <Content Include="Areas\Admin\Views\QLKhoaHoc\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanTriAd\Matkhau1.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2089,6 +2099,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905191459467_1.resx">
       <DependentUpon>201905191459467_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905251424415_taiKhoan.resx">
+      <DependentUpon>201905251424415_taiKhoan.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

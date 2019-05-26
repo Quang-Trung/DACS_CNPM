@@ -11,25 +11,13 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Hoc_Vien()
         {
-            CauHoi = new HashSet<CauHoi>();
+            Cau_Hoi = new HashSet<Cau_Hoi>();
             Dang_Ky_KH = new HashSet<Dang_Ky_KH>();
             Giang_Vien = new HashSet<Giang_Vien>();
         }
 
         [Key]
         public int MaHv { get; set; }
-
-        [Display(Name ="Tên đăng nhập")]
-        [StringLength(100)]
-        [Required(ErrorMessage = "Vui lòng điền tên đăng nhập")]
-        public string TenDn { get; set; }
-
-        [Required(ErrorMessage = "Vui lòng điền mật khẩu")]
-        [Display(Name ="Mật khẩu")]
-        [DataType(DataType.Password)]
-        [StringLength(100)]
-        public string MatKhau { get; set; }
-
         [RegularExpression(@"^[ a-zA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵ]+$", ErrorMessage = "Họ và tên phải là chữ")]
         [Required(ErrorMessage = "Vui lòng điền họ tên")]
         [Display(Name = "Họ tên")]
@@ -47,21 +35,32 @@
         [Display(Name = "Điện thoại liên hệ")]
         [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
         [RegularExpression(@"^[0-9]+$", ErrorMessage = "Số điện thoại phải là số")]
-        [StringLength(20)]
+        [StringLength(13)]
         public string Sdt { get; set; }
-
         [Display(Name = "Loại thành viên")]
         public int? MaLoaiTV { get; set; }
-
         [Display(Name = "Ngày sinh")]
         [Column(TypeName = "date")]
         public DateTime? NgaySinh { get; set; }
-
+        [Display(Name = "Giới tính")]
+        [StringLength(5)]
+        public string GioiTinh { get; set; }
         [Display(Name = "Hình ảnh")]
         public string HinhAnh { get; set; }
 
+        [Display(Name = "Tên đăng nhập")]
+        [StringLength(100)]
+        [Required(ErrorMessage = "Vui lòng điền tên đăng nhập")]
+        public string TenDn { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng điền mật khẩu")]
+        [Display(Name = "Mật khẩu")]
+        [DataType(DataType.Password)]
+        [StringLength(100)]
+        public string MatKhau { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CauHoi> CauHoi { get; set; }
+        public virtual ICollection<Cau_Hoi> Cau_Hoi { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dang_Ky_KH> Dang_Ky_KH { get; set; }
@@ -70,6 +69,5 @@
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Giang_Vien> Giang_Vien { get; set; }
-      
     }
 }

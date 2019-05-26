@@ -18,11 +18,10 @@ namespace DACS_CNPM.Entities
         [Column(TypeName = "date")]
         public DateTime? NgayDangKy { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal? UuDai { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? NgayHetHan { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal? ThanhToan { get; set; }
+        public long? ThanhToan { get; set; }
 
         public virtual Hoc_Vien Hoc_Vien { get; set; }
 

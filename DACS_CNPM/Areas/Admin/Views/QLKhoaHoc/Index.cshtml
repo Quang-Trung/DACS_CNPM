@@ -1,0 +1,99 @@
+﻿@model IEnumerable<DACS_CNPM.Entities.Khoa_hoc>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAd.cshtml";
+}
+
+<div id="content-wrapper">
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Danh sách khóa học
+        </div>
+        @*<div class="container-fluid">
+            <h2>Danh sách khóa học</h2>
+            <hr />*@
+        <div class="card-header">
+            <a class="btn btn-success" href="/Admin/QLKhoaHoc/Create">Tạo mới khóa học</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Banner)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Giang_Vien.HoTen)
+                            </th>
+                            <th>
+                                Loại khóa học
+                            </th>
+                            <th>
+                                Môn học
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TenKh)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.HocPhi)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MoTa)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NgayBatDau)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.HanSuDung)
+                            </th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            <a href="#"><img src="~/Content/KH_Images/@item.Banner" alt="" height="100" width="150" /></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Giang_Vien.HoTen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Loai_Khoa_Hoc.TenLoai)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mon_Hoc.TenMh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenKh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HocPhi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MoTa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NgayBatDau)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HanSuDung) năm
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-info" href="/Admin/QLKhoaHoc/Details?id=@item.MaKh">Chi tiết</a>
+                            <a class="btn btn-outline-success" href="/Admin/QLKhoaHoc/Edit?id=@item.MaKh">Sửa</a>
+                            <button class="btn btn-outline-danger" href="/Admin/QLKhoaHoc/Delete?id=@item.MaKh" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">Xóa</button>
+                            <br />
+                        </td>
+                    </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

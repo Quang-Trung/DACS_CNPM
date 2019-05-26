@@ -45,7 +45,7 @@ namespace DACS_CNPM.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.MaLoaiTV = new SelectList(db.Loai_TV.ToList().OrderBy(x => x.TenLoai), "MaLoaiTv", "TenLoai");
+            ViewBag.MaLoaiTV = new SelectList(db.Loai_TV.ToList().OrderBy(x => x.Tenloai), "MaLoaiTv", "TenLoai");
 
             return View();
         }
@@ -54,7 +54,7 @@ namespace DACS_CNPM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Hoc_Vien hv, HttpPostedFileBase fileanh)
         {
-            ViewBag.MaLoaiTV = new SelectList(db.Loai_TV.ToList().OrderBy(x => x.TenLoai), "MaLoaiTv", "TenLoai");
+            ViewBag.MaLoaiTV = new SelectList(db.Loai_TV.ToList().OrderBy(x => x.Tenloai), "MaLoaiTv", "TenLoai");
 
             if (fileanh != null)
             {

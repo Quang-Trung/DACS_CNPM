@@ -1,4 +1,4 @@
-namespace DACS_CNPM.Entities
+﻿namespace DACS_CNPM.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -17,30 +17,41 @@ namespace DACS_CNPM.Entities
 
         [Key]
         public int MaGv { get; set; }
-
+        [RegularExpression(@"^[ a-zA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵ]+$", ErrorMessage = "Họ và tên phải là chữ")]
+        [Required(ErrorMessage = "Vui lòng điền họ tên")]
+        [Display(Name = "Tên giảng viên")]
         public string HoTen { get; set; }
-
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "Vui lòng nhập email")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Email phải định dạnh abc@xxx.xyz")]
+        [StringLength(100)]
         public string Email { get; set; }
 
-        [StringLength(20)]
+        [Display(Name = "Điện thoại liên hệ")]
+        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Số điện thoại phải là số")]
+        [StringLength(13)]
         public string Sdt { get; set; }
 
+        [Display(Name = "Địa chỉ")]
         public string DiaChi { get; set; }
 
+        [Display(Name = "Lý lịch")]
         public string LyLich { get; set; }
 
+        [Display(Name = "Bằng cấp")]
         public string BangCap { get; set; }
 
+        [Display(Name = "Ngày sinh")]
         [Column(TypeName = "date")]
         public DateTime? NgaySinh { get; set; }
 
+        [Display(Name = "Giới tính")]
+        [StringLength(5)]
+        public string GioiTinh { get; set; }
+
+        [Display(Name = "Hình ảnh")]
         public string HinhAnh { get; set; }
-
-        [StringLength(100)]
-        public string TenDn { get; set; }
-
-        [StringLength(100)]
-        public string MatKhau { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Khoa_hoc> Khoa_hoc { get; set; }
